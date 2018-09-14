@@ -1,0 +1,64 @@
+plugins {
+    id "java"
+    id "eclipse"
+    id "org.jetbrains.kotlin.jvm" version "1.2.21"
+    id "idea"
+    id "jaci.openrio.gradle.GradleRIO" version "2018.03.06"
+    id "org.ajoberstar.grgit" version '2.1.1'
+}
+
+def TEAM = 3309
+def ROBOT_CLASS = "org.usfirst.frc.team3309.robot.Robot"
+
+wpi {
+    wpilibVersion = "2018.4.1"
+    ctreVersion = "5.3.1.0"
+}
+
+task gitCommit() {
+    grgit.commit {
+        all = true
+        message = "Auto-Commit"
+    }
+}
+
+deploy {
+
+    targets {
+        target("roborio", jaci.openrio.gradle.frc.RoboRIO) {
+            team = TEAM
+        }
+    }
+    artifacts {
+        artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
+            targets << "roborio"
+            dependsOn(gitCommit)
+        }
+    }
+}
+
+sourceSets {
+    main.kotlin.srcDirs = ['src/']
+    main.java.srcDirs = ['src/']
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile wpilib()
+    compile ctre()
+    compile navx()
+    compile openrio.powerup.matchData()
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest jaci.openrio.gradle.GradleRIOPlugin.javaManifest(ROBOT_CLASS)
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4'
+}
