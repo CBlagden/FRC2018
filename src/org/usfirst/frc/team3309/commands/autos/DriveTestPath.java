@@ -8,7 +8,7 @@ public class DriveTestPath extends CommandGroup {
 
     @Override
     public void start() {
-        addSequential(new DriveToPoints(120, false,
+        addSequential(new DriveToPoints(120, false, 100,
                 new Translation2d(190, 0),
                 new Translation2d(214, -24),
                 new Translation2d(229, -70),

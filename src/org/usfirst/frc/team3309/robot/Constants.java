@@ -36,13 +36,13 @@ public class Constants {
 
     public static int JOYSTICK_TRIGGER_BUTTON = 1;
 
-    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -2700;
-    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1550 : -1500;
-    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -1700;
-    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -2300;
-    public static double BELTBAR_SCALE_UP_POS = Constants.currentRobot == Robot.PRACTICE ? -2550 : -2500;
-    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -1900;
-    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -2700;
+    public static double BELTBAR_BOTTOM_POS = Constants.currentRobot == Robot.PRACTICE ? -2680 : -4500; // -2700
+    public static double BELTBAR_INTAKE_POS = Constants.currentRobot == Robot.PRACTICE ? -1550 : -3150;
+    public static double BELTBAR_EXCHANGE_POS = Constants.currentRobot == Robot.PRACTICE ? -1800 : -3600;
+    public static double BELTBAR_EJECT_POS = Constants.currentRobot == Robot.PRACTICE ? -2400 : -4100;
+    public static double BELTBAR_SCALE_UP_POS = Constants.currentRobot == Robot.PRACTICE ? -2550 : -4300;
+    public static double BELTBAR_SWITCH_POS = Constants.currentRobot == Robot.PRACTICE ? -2000 : -3500;
+    public static double BELTBAR_CLIMB = Constants.currentRobot == Robot.PRACTICE ? -2800 : -4500;
 
     public static double ELEVATOR_BOTTOM_POS = 0;
     public static double ELEVATOR_INTAKE_POS = 1100;
@@ -115,11 +115,11 @@ public class Constants {
     // from codo
 
     // Autonomous Driving
-    public static final double TrackRadius = 7.7; // LOWER THIS TO REDUCE OSCILLATION
+    public static final double TrackRadius = 7.523309; // LOWER THIS TO REDUCE OSCILLATION 7.523309
     public static final double WheelDiameter = 6;
     public static final double MinimumTurningRadius = 40;
     public static final double MinPathSpeed = 20;
-    public static final double MaxPathSpeed = 120;
+    public static final double MaxPathSpeed = 250;
     public static final double MinLookAheadDistance = 14; // 14
     public static final double MaxLookAheadDistance = 30; // 30
 

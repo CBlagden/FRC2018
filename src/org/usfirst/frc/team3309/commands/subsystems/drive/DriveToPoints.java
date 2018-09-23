@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3309.commands.subsystems.drive;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.lib.CommandEx;
 import org.usfirst.frc.team3309.lib.controllers.helpers.AutoDriveSignal;
@@ -15,7 +16,7 @@ public class DriveToPoints extends CommandEx {
     private PurePursuitController autonomousDriver;
     private AutoDriveSignal signal;
 
-	public DriveToPoints(double speed, boolean isReversed, Translation2d... points) {
+	public DriveToPoints(double speed, boolean isReversed, double accel, Translation2d... points) {
 
         Path drivePath = new Path(RobotTracker.getInstance().getOdometry().translationMat);
         SmartDashboard.putNumber("Initial x: ", RobotTracker.getInstance().getOdometry().translationMat.getX());
@@ -24,7 +25,7 @@ public class DriveToPoints extends CommandEx {
         for (Translation2d point : points) {
             drivePath.addPoint(point.getX(), point.getY(), speed);
         }
-        autonomousDriver = new PurePursuitController(drivePath, isReversed);
+        autonomousDriver = new PurePursuitController(drivePath, isReversed, accel);
         autonomousDriver.resetTime();
         requires(Robot.drive);
 	}

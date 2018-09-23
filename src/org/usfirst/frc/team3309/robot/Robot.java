@@ -137,9 +137,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("X: ", tracker.getOdometry().translationMat.getX());
         SmartDashboard.putNumber("Y: ", tracker.getOdometry().translationMat.getY());
 
-        if (Timer.getFPGATimestamp() - start >= (135 - 50)) {
+       /* if (Timer.getFPGATimestamp() - start >= (135 - 50)) {
             OI.operatorRemote.setRumble(1.0);
-        }
+        }*/
 
     }
 

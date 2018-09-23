@@ -54,10 +54,10 @@ public class BeltBar extends Subsystem {
         masterBar.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 10);
         masterBar.changeToPositionMode();
 
-        masterBar.config_kP(0, 3, 10);
+        masterBar.config_kP(0, 0.7, 10); // 3
         masterBar.config_kI(0, 0, 10);
-        masterBar.config_kD(0, 0.5, 10);
-        masterBar.config_kF(0, 0.04, 10);
+        masterBar.config_kD(0, 0., 10); // 0.5
+        masterBar.config_kF(0, 0.03, 10); // 0.04
         masterBar.config_IntegralZone(0, 0, 0);
         masterBar.clearStickyFaults(10);
 
@@ -67,8 +67,8 @@ public class BeltBar extends Subsystem {
         }
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
-            REVERSE_SOFT_LIM = -3200;
-            FORWARD_SOFT_LIM = -200;
+            REVERSE_SOFT_LIM = -4700; // -3200
+            FORWARD_SOFT_LIM = -3200; // -200
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);
@@ -80,6 +80,9 @@ public class BeltBar extends Subsystem {
         masterBar.configPeakCurrentDuration(MAX_CURRENT_DURATION, 10);
         masterBar.configContinuousCurrentLimit(1, 10);
         masterBar.enableCurrentLimit(true);
+
+        masterBar.configPeakOutputForward(1.0, 10);
+        masterBar.configPeakOutputReverse(-1.0, 10);
 
         changeToBrakeMode();
     }

@@ -46,7 +46,7 @@ public class Lift extends Subsystem {
         lift0.configForwardSoftLimitEnable(true, 10);
 
         lift0.config_kP(0, 0.26, 10);
-        lift0.config_kI(0,3.2*Math.pow(10,-5),10);
+        lift0.config_kI(0,0,10); // 3.2*Math.pow(10,-6)
         lift0.config_kD(0, 30, 10);
         lift0.config_IntegralZone(0,200,10);
         lift0.config_kF(0, 0.024, 10);

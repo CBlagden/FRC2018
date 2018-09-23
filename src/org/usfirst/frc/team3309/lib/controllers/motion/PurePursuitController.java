@@ -18,10 +18,10 @@ public class PurePursuitController {
 	private boolean isReversed;
 	private RateLimiter speedProfiler;
 
-	public PurePursuitController(Path robotPath, boolean isReversed) {
+	public PurePursuitController(Path robotPath, boolean isReversed, double accel) {
 		this.robotPath = robotPath;
 		this.isReversed = isReversed;
-		speedProfiler = new RateLimiter(100, 1000);
+		speedProfiler = new RateLimiter(accel, 1000); // 100, 150
 		if (robotPath.isEmpty()) {
 
 		}
