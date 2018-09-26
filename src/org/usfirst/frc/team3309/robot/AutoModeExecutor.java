@@ -14,12 +14,12 @@ public class AutoModeExecutor {
 
     public static void displayAutos() {
 
-        autos.addObject("No Action", new NoActionAuto());
+        autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
 
         autos.addObject("MiddleSwitchPath", new SwitchPathAuto());
 
-        autos.addDefault("RightScaleAutoPath", new ScalePathAuto(true));
+        autos.addObject("RightScaleAutoPath", new ScalePathAuto(true));
 
         autos.addObject("DriveBackTest",  new CommandGroup() {
             @Override

@@ -10,7 +10,8 @@ public class AutoLineAuto extends CommandGroup {
 
     @Override
     public void start() {
-        addSequential(new DriveStraight(100, 25000, 0));
+        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+        addSequential(new DriveStraight(80, 25000, 0));
         super.start();
     }
 

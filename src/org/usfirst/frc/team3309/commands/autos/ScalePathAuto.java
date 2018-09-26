@@ -37,7 +37,7 @@ public class ScalePathAuto extends CommandGroup {
                                 new Translation2d(115.8, 0),
                                 new Translation2d(174.6, -1.65),
                                 new Translation2d(200.55, -5.69),
-                                new Translation2d(250.59, -22.27)
+                                new Translation2d(255.59, -25.27)
                         )
                 );
 
@@ -56,15 +56,15 @@ public class ScalePathAuto extends CommandGroup {
             } else if (Robot.isLeftScale() && isStartRight) {
            //     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveToPoints(128, false, 150,
-                                new Translation2d(110.71, 0),
+                                new Translation2d(114.71, 0),
                                 new Translation2d(154.81, -10.05),
                                 new Translation2d(195.56, -44.09),
                                 new Translation2d(211.53, -74.50),
-                                new Translation2d(211.53, -122.0),
-                                new Translation2d(220.53, -133.78),
-                                new Translation2d(258.04, -137.40),
-                                new Translation2d(270.49, -145.16),
-                                new Translation2d(274.17, -152.64)
+                                new Translation2d(211.53, -112.0),
+                                new Translation2d(220.53, -117.78),
+                                new Translation2d(254.04, -140.40),
+                                new Translation2d(270.49, -133.16),
+                                new Translation2d(274.17, -138.64)
                         )
                 );
             }
