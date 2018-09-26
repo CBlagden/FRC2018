@@ -21,14 +21,7 @@ public class AutoModeExecutor {
 
         autos.addObject("RightScaleAutoPath", new ScalePathAuto(true));
 
-        autos.addObject("DriveBackTest",  new CommandGroup() {
-            @Override
-            public synchronized void start() {
-                addSequential(new DriveToPoints(140, true, 100,
-                        new Translation2d(0, -40)));
-                super.start();
-            }
-        });
+        autos.addObject("RightSideSwitch", new SideSwitchAutoPath(true));
 
         SmartDashboard.putData("Autos: ", autos);
     }
