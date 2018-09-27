@@ -7,6 +7,7 @@ import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.arms.ArmsOpen;
+import org.usfirst.frc.team3309.commands.subsystems.drive.DriveEnd;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveStraight;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveToPoints;
 import org.usfirst.frc.team3309.commands.subsystems.rollers.RollersActuate;
@@ -43,8 +44,9 @@ public class ScalePathAuto extends CommandGroup {
 
                 releaseCube();
 
-                addSequential(new DriveStraight(-17, 12000, true, true));
+                addSequential(new DriveStraight(-17, 12000, true, false));
                 addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+                addSequential(new DriveEnd());
 
  /*           addSequential(new DriveToPoints(100, false,
                     new Translation2d(245.52, -30.38),
@@ -53,7 +55,24 @@ public class ScalePathAuto extends CommandGroup {
                     new Translation2d(240.06, -47.52),
                     new Translation2d(234.19, -48.37),
                     new Translation2d(197.38, -50.49)));*/
-            } else if (Robot.isLeftScale() && isStartRight) {
+            } else if (Robot.isLeftScale() && !isStartRight) {
+                addParallel(new WaitAndMoveAssembly(1.7, AssemblyLocation.SCALE_UP));
+                addSequential(new DriveToPoints(180, false, 150,
+                                new Translation2d(115.8, 0),
+                                new Translation2d(174.6, 1.65),
+                                new Translation2d(200.55, 5.69),
+                                new Translation2d(255.59, 25.27)
+                        )
+                );
+
+                releaseCube();
+
+                addSequential(new DriveStraight(-17, 12000, true, false));
+                addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
+                addSequential(new DriveEnd());
+            }
+
+            /*else if (Robot.isLeftScale() && isStartRight) {
            //     addSequential(new MoveAssembly(AssemblyLocation.SWITCH));
                 addSequential(new DriveToPoints(128, false, 150,
                                 new Translation2d(114.71, 0),
@@ -67,7 +86,7 @@ public class ScalePathAuto extends CommandGroup {
                                 new Translation2d(274.17, -138.64)
                         )
                 );
-            }
+            }*/
         }
         super.start();
     }

@@ -104,7 +104,9 @@ public class SwitchPathAuto extends CommandGroup {
     }
 
     void backUp() {
-        addSequential(new DriveStraight(-10, 17000, true, true));
+        addSequential(new DriveStraight(-10, 15000, true, false));
+        addSequential(new MoveAssembly(AssemblyLocation.BOTTOM));
     }
+
 
 }

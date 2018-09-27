@@ -20,8 +20,7 @@ public class AutoModeExecutor {
         autos.addObject("MiddleSwitchPath", new SwitchPathAuto());
 
         autos.addObject("RightScaleAutoPath", new ScalePathAuto(true));
-
-        autos.addObject("RightSideSwitch", new SideSwitchAutoPath(true));
+        autos.addObject("LeftScaleAutoPath", new ScalePathAuto(false));
 
         SmartDashboard.putData("Autos: ", autos);
     }
