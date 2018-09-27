@@ -41,7 +41,7 @@ public class BeltBar extends Subsystem {
     public int FORWARD_SOFT_LIM = 0;
     public int REVERSE_SOFT_LIM = 0;
 
-    private final double LIM_TOLERANCE = 300;
+    private final double LIM_TOLERANCE = 400;
 
     public BeltBar() {
         init();
@@ -68,7 +68,7 @@ public class BeltBar extends Subsystem {
 
         if (Constants.currentRobot == Constants.Robot.COMPETITION) {
             REVERSE_SOFT_LIM = -4700; // -3200
-            FORWARD_SOFT_LIM = -3200; // -200
+            FORWARD_SOFT_LIM = -3050; // -200
         }
 
         masterBar.configForwardSoftLimitThreshold(FORWARD_SOFT_LIM, 10);
@@ -100,15 +100,15 @@ public class BeltBar extends Subsystem {
 
     private void stopIfOut() {
         if (!isClimbing && !isManual) {
-            if (getPosition() > FORWARD_SOFT_LIM + LIM_TOLERANCE) {
-                masterBar.set(ControlMode.Disabled, 0);
-                disableLimits();
-                DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
-            } else if (getPosition() < REVERSE_SOFT_LIM - LIM_TOLERANCE) {
-                masterBar.set(ControlMode.Disabled, 0);
-                disableLimits();
-                DriverStation.reportWarning("Catting on beltbar!! Outside back!", false);
-            }
+                if (getPosition() > FORWARD_SOFT_LIM + LIM_TOLERANCE) {
+                    masterBar.set(ControlMode.Disabled, 0);
+                    disableLimits();
+                    DriverStation.reportWarning("Catting on beltbar!! Outside front!", false);
+                } else if (getPosition() < REVERSE_SOFT_LIM - LIM_TOLERANCE) {
+                    masterBar.set(ControlMode.Disabled, 0);
+                    disableLimits();
+                    DriverStation.reportWarning("Catting on beltbar!! Outside back!", false);
+                }
         }
     }
 

@@ -15,6 +15,8 @@ import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
 import org.usfirst.frc.team3309.robot.Constants;
 
+import javax.sound.sampled.Control;
+
 public class Lift extends Subsystem {
 
     private TalonSRXMC lift0 = new TalonSRXMC(Constants.LIFT_0);
@@ -127,7 +129,8 @@ public class Lift extends Subsystem {
     }
 
     public void set(double value) {
-        lift0.set(value);
+        lift0.set(ControlMode.PercentOutput, 0);
+//        lift0.set(value);
     }
 
     public void set(ControlMode controlMode, double value) {

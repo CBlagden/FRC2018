@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
     public static Rollers rollers;
     public static LED led;
 
+
     private Compressor c;
     private OI oi;
 
@@ -120,7 +121,7 @@ public class Robot extends TimedRobot {
         if (autoCommand != null) {
             autoCommand.cancel();
         }
-//        drive.reset();
+        drive.reset();
         drive.setHighGear();
         drive.changeToBrakeMode();
         falconDoors.setUp();
@@ -151,7 +152,7 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         falconDoors.setUp();
-//        drive.reset();
+        drive.reset();
     }
 
     public void sendToDashboard() {
