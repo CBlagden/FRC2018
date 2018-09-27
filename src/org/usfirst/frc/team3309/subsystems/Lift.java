@@ -129,7 +129,7 @@ public class Lift extends Subsystem {
     }
 
     public void set(double value) {
-        lift0.set(ControlMode.PercentOutput, 0);
+        lift0.set(value);
     }
 
     public void set(ControlMode controlMode, double value) {
