@@ -10,12 +10,16 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTeleop;
 import org.usfirst.frc.team3309.lib.actuators.TalonSRXMC;
 import org.usfirst.frc.team3309.lib.actuators.VictorSPXMC;
-import org.usfirst.frc.team3309.lib.math.Rotation;
+import org.usfirst.frc.team3309.lib.geometry.Pose2d;
+import org.usfirst.frc.team3309.lib.geometry.Pose2dWithCurvature;
+import org.usfirst.frc.team3309.lib.geometry.Rotation2d;
+import org.usfirst.frc.team3309.lib.trajectory.timing.TimedState;
 import org.usfirst.frc.team3309.robot.Constants;
 import org.usfirst.frc.team3309.robot.Robot;
 
@@ -35,9 +39,14 @@ public class Drive extends Subsystem {
 
     private AHRS navX = new AHRS(SPI.Port.kMXP);
 
+    private PeriodicIO mPeriodicIO;
+    private Rotation2d mGyroOffset = Rotation2d.identity();
+
     private double goalPos;
 
     public Drive() {
+        mPeriodicIO = new PeriodicIO();
+
         left0.changeToPercentMode();
         left0.configPeakOutputForward(1.0, 10);
         left0.configPeakOutputReverse(-1.0, 10);
@@ -85,6 +94,23 @@ public class Drive extends Subsystem {
         setDefaultCommand(new DriveTeleop());
     }
 
+    public synchronized void setHeading(Rotation2d heading) {
+        System.out.println("SET HEADING: " + heading.getDegrees());
+
+        mGyroOffset = heading.rotateBy(Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).inverse());
+        System.out.println("Gyro offset: " + mGyroOffset.getDegrees());
+
+        mPeriodicIO.gyro_heading = heading;
+    }
+
+    public TalonSRXMC getLeftMaster() {
+        return left0;
+    }
+
+    public TalonSRXMC getRightMaster() {
+        return right0;
+    }
+
     public double getDistance() {
         return (getLeftDistance() + getRightDistance()) / 2.0;
     }
@@ -103,6 +129,10 @@ public class Drive extends Subsystem {
 
     public double inchesToEncoderCounts(double inches) {
         return inches * (Constants.DRIVE_ENCODER_COUNTS_PER_REV / (Math.PI * Constants.WHEEL_DIAMETER_INCHES));
+    }
+
+    public double radiansPerSecondToTicksPer100ms(double rad_s) {
+        return rad_s / (Math.PI * 2.0) * 4096.0 / 10.0;
     }
 
     public void reset() {
@@ -283,9 +313,6 @@ public class Drive extends Subsystem {
         left0.configMotionCruiseVelocity(sensorUnitsPer100ms, 10);
     }
 
-    public Rotation getGyroAngle() {
-        return Rotation.fromDegrees(getAngPos());
-    }
 
     public void disableOutput()
     {
@@ -299,6 +326,27 @@ public class Drive extends Subsystem {
 
     public void setGoalPos(double goalPos) {
         this.goalPos = goalPos;
+    }
+
+    public static class PeriodicIO {
+        // INPUTS
+        public int left_position_ticks;
+        public int right_position_ticks;
+        public double left_distance;
+        public double right_distance;
+        public int left_velocity_ticks_per_100ms;
+        public int right_velocity_ticks_per_100ms;
+        public Rotation2d gyro_heading = Rotation2d.identity();
+        public Pose2d error = Pose2d.identity();
+
+        // OUTPUTS
+        public double left_demand;
+        public double right_demand;
+        public double left_accel;
+        public double right_accel;
+        public double left_feedforward;
+        public double right_feedforward;
+        public TimedState<Pose2dWithCurvature> path_setpoint = new TimedState<Pose2dWithCurvature>(Pose2dWithCurvature.identity());
     }
 
 }

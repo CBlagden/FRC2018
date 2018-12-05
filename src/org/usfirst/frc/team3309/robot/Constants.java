@@ -123,4 +123,36 @@ public class Constants {
     public static final double MinLookAheadDistance = 14; // 14
     public static final double MaxLookAheadDistance = 30; // 30
 
+    /* ROBOT PHYSICAL CONSTANTS */
+
+    // Wheels
+    public static final double kDriveWheelTrackWidthInches = 25.54;
+    public static final double kDriveWheelDiameterInches = 3.92820959548 * 0.99;
+    public static final double kDriveWheelRadiusInches = kDriveWheelDiameterInches / 2.0;
+    public static final double kTrackScrubFactor = 1.0;  // Tune me!
+
+    // Tuned dynamics
+    public static final double kRobotLinearInertia = 60.0;  // kg TODO tune
+    public static final double kRobotAngularInertia = 10.0;  // kg m^2 TODO tune
+    public static final double kRobotAngularDrag = 12.0;  // N*m / (rad/sec) TODO tune
+    public static final double kDriveVIntercept = 1.055;  // V
+    public static final double kDriveKv = 0.135;  // V per rad/s
+    public static final double kDriveKa = 0.012;  // V per rad/s^2
+
+    // Geometry
+    public static final double kCenterToFrontBumperDistance = 38.25 / 2.0;
+    public static final double kCenterToRearBumperDistance = 38.25 / 2.0;
+    public static final double kCenterToSideBumperDistance = 33.75 / 2.0;
+
+    // PID gains for drive velocity loop (LOW GEAR)
+    // Units: setpoint, error, and output are in ticks per second.
+    public static final double kDriveLowGearVelocityKp = 0.9;
+    public static final double kDriveLowGearVelocityKi = 0.0;
+    public static final double kDriveLowGearVelocityKd = 10.0;
+    public static final double kDriveLowGearVelocityKf = 0.0;
+    public static final int kDriveLowGearVelocityIZone = 0;
+    public static final double kDriveVoltageRampRate = 0.0;
+
+
+
 }

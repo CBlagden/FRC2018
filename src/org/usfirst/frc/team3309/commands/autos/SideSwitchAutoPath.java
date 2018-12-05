@@ -5,9 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team3309.commands.WaitAndMoveAssembly;
 import org.usfirst.frc.team3309.commands.subsystems.AssemblyLocation;
 import org.usfirst.frc.team3309.commands.subsystems.MoveAssembly;
-import org.usfirst.frc.team3309.commands.subsystems.drive.DriveToPoints;
 import org.usfirst.frc.team3309.commands.subsystems.drive.DriveTurn;
-import org.usfirst.frc.team3309.lib.math.Translation2d;
 import org.usfirst.frc.team3309.robot.Robot;
 
 public class SideSwitchAutoPath extends CommandGroup {

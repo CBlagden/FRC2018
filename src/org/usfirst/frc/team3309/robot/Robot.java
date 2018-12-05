@@ -37,9 +37,6 @@ public class Robot extends TimedRobot {
     private static boolean isLeftScale;
     private static boolean isRightScale;
 
-
-    RobotTracker tracker;
-
     private PowerDistributionPanel pdp;
 
     @Override
@@ -57,7 +54,6 @@ public class Robot extends TimedRobot {
         }
         lift = new Lift();
         drive = new Drive();
-        tracker = RobotTracker.getInstance();
         beltBar = new BeltBar();
         falconDoors = new FalconDoors();
         arms = new Arms();
@@ -102,11 +98,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-        SmartDashboard.putNumber("X: ", tracker.getOdometry().translationMat.getX());
-        SmartDashboard.putNumber("Y: ", tracker.getOdometry().translationMat.getY());
         Scheduler.getInstance().run();
         sendToDashboard();
-        tracker.update();
     }
 
     private double start;
@@ -133,10 +126,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         sendToDashboard();
-        tracker.update();
 
-        SmartDashboard.putNumber("X: ", tracker.getOdometry().translationMat.getX());
-        SmartDashboard.putNumber("Y: ", tracker.getOdometry().translationMat.getY());
 
        /* if (Timer.getFPGATimestamp() - start >= (135 - 50)) {
             OI.operatorRemote.setRumble(1.0);
