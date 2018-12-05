@@ -8,9 +8,9 @@ public class RamseteTest extends CommandGroup {
 
     private DriveTrajectory trajectory;
 
-    public RamseteTest() {
+    public RamseteTest(boolean side) {
         this.trajectory = new DriveTrajectory(TrajectoryGenerator.getInstance().getTrajectorySet()
-                .sideStartToNearScale.get(true));
+                .pyramidCubeToSwitch.get(side));
     }
 
     @Override

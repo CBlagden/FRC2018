@@ -14,7 +14,7 @@ public class AutoModeExecutor {
         autos.addDefault("No Action", new NoActionAuto());
         autos.addObject("AutoLineAuto", new AutoLineAuto());
 
-        autos.addObject("RamseteTest", new RamseteTest());
+        autos.addObject("RamseteTestLeft", new RamseteTest(true));
 
         SmartDashboard.putData("Autos: ", autos);
     }
@@ -22,6 +22,5 @@ public class AutoModeExecutor {
     public static Command getAutoSelected() {
         return autos.getSelected();
     }
-
 
 }
